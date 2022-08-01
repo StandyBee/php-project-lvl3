@@ -2,6 +2,16 @@
 
 @section('content')
 
+<div class="container-lg mt-5">
+@include('flash::message')
+
+    @if ($errors->any())
+        @if ($errors->url)
+        <div class="alert alert-danger">{{ 'Некорректный URL' }}</div>
+        @endif
+    @endif
+</div>
+
 <main class="flex-grow-1">
     <div class="container-lg mt-3">
         <div class="row">

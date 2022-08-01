@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 
 class UrlsController extends Controller
 {
@@ -37,11 +38,24 @@ class UrlsController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'url.name' => ['required', 'url', 'max:255']
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
         $parsedRequest = parse_url($request['url.name']);
         $data = ['name' => "{$parsedRequest['scheme']}://{$parsedRequest['host']}", 'created_at' => Carbon::now()];
-        $query_insert = DB::table('urls')->insertGetId($data);
-        $id = DB::table('urls')->where('name', '=', $request['url.name'])->value('id');
-        return redirect()->route('urls.show', $id);
+        if (DB::table('urls')->where('name', $data['name'])->doesntExist()) {
+            $query_insert = DB::table('urls')->insertGetId($data);
+            $id = DB::table('urls')->where('name', $data['name'])->value('id');
+            flash('Страница успешно добавлена')->success();
+            return redirect()->route('urls.show', $id);
+        }
+        flash('Страница уже существует')->warning();
+        $id = DB::table('urls')->where('name', $data['name'])->value('id');
+            return redirect()->route('urls.show', $id);
     }
 
     /**
