@@ -16,7 +16,7 @@ class UrlsController extends Controller
      */
     public function index()
     {
-        $urls = DB::table('urls')->get();
+        $urls = DB::table('urls')->orderBy('id')->get();
         return view('index', compact('urls'));
     }
 
@@ -45,17 +45,20 @@ class UrlsController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator);
         }
+
         $parsedRequest = parse_url($request['url.name']);
         $data = ['name' => "{$parsedRequest['scheme']}://{$parsedRequest['host']}", 'created_at' => Carbon::now()];
+
         if (DB::table('urls')->where('name', $data['name'])->doesntExist()) {
             $query_insert = DB::table('urls')->insertGetId($data);
             $id = DB::table('urls')->where('name', $data['name'])->value('id');
             flash('Страница успешно добавлена')->success();
             return redirect()->route('urls.show', $id);
         }
+
         flash('Страница уже существует')->warning();
         $id = DB::table('urls')->where('name', $data['name'])->value('id');
-            return redirect()->route('urls.show', $id);
+        return redirect()->route('urls.show', $id);
     }
 
     /**
@@ -67,7 +70,8 @@ class UrlsController extends Controller
     public function show($id)
     {
         $url = DB::table('urls')->find($id);
-        return view('showurl', ['url' => $url]);
+        $checks = DB::table('url_checks')->orderBy('created_at', 'desc')->where('url_id', $id)->get();
+        return view('showurl', compact('url', 'checks'));
     }
 
     /**

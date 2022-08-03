@@ -2,11 +2,13 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-class UrlsTest extends TestCase
+class UrlsControllerTest extends TestCase
 {
     public int $id;
     public function setUp(): void

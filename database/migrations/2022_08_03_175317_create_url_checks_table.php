@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUrlsTable extends Migration
+class CreateUrlChecksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateUrlsTable extends Migration
      */
     public function up()
     {
-        Schema::create('urls', function (Blueprint $table) {
+        Schema::create('url_checks', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255);
+            $table->foreignId('url_id')->constrained('urls');
+            $table->bigInteger('status_code')->nullable();
+            $table->string('h1')->nullable();
+            $table->string('keywords')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ class CreateUrlsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('urls');
+        Schema::dropIfExists('url_checks');
     }
 }

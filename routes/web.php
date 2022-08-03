@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UrlsController;
+use App\Http\Controllers\UrlsCheckController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,5 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('urls', UrlsController::class)->except(['create', 'update', 'destroy']);
+Route::resource('urls', UrlsController::class)->except(['edit', 'create', 'update', 'destroy']);
+
+Route::resource('urls.check', UrlsCheckController::class)->only('store');
 

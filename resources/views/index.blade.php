@@ -17,8 +17,8 @@
     @foreach($urls as $url)
     <tr>
       <th scope="row">{{ $url->id }}</th>
-      <td>{{ $url->name }}</td>
-      <td></td>
+      <td><a href="{{ route('urls.show', $url->id) }}">{{ $url->name }}</a></td>
+      <td>{{ $url->updated_at }}</td>
       <td></td>
     </tr>
     @endforeach
