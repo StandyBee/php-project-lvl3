@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 
 class UrlsCheckControllerTest extends TestCase
 {
@@ -20,6 +21,11 @@ class UrlsCheckControllerTest extends TestCase
 
     public function testChecks(): void
     {
+        $fakeHtml = file_get_contents(__DIR__ . "/../Fixtures/fake.html");
+        $name = DB::table('urls')->where('id', '=',  $this->id)->value('name');
+
+        Http::fake([$name => Http::response($fakeHtml)]);
+
         $response = $this->post(route('urls.check.store', $this->id));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
