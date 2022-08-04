@@ -22,7 +22,16 @@ class UrlsCheckController extends Controller
     {
         $url = DB::table('urls')->find($id);
 
-        DB::table('url_checks')->insert(['url_id' => $id, 'created_at' => Carbon::now()]);
+        try {
+            $response = Http::timeout(3)->get($url->name);
+        } catch (HttpClientException $exception) {
+            flash($exception->getMessage())->error();
+            return redirect()->route('urls.show', $id);
+        }
+
+        $response = Http::get($url->name)->status();
+
+        DB::table('url_checks')->insert(['url_id' => $id, 'status_code' => $response, 'created_at' => Carbon::now()]);
 
         DB::table('urls')->where('id', '=', $id)->update(['updated_at' => Carbon::now()]);
 

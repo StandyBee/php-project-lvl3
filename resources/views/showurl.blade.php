@@ -40,14 +40,14 @@
                     <th>ID</th>
                     <th>Код ответа</th>
                     <th>h1</th>
-                    <th>keywords</th>
+                    <th>title</th>
                     <th>description</th>
                     <th>Дата создания</th>
                 </tr>
                 @foreach($checks as $check)
                 <tr>
                     <td>{{ $check->id }}</td>
-                    <td></td>
+                    <td>{{ $check->status_code }}</td>
                     <td></td>
                     <td></td>
                     <td></td>

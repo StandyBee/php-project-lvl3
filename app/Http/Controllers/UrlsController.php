@@ -17,7 +17,10 @@ class UrlsController extends Controller
     public function index()
     {
         $urls = DB::table('urls')->orderBy('id')->get();
-        return view('index', compact('urls'));
+
+        $status = DB::table('url_checks')->get()->keyBy('url_id');
+        //dd($status->keyBy('url_id'));
+        return view('index', compact('urls', 'status'));
     }
 
     /**
