@@ -16,21 +16,9 @@ class UrlsController extends Controller
      */
     public function index()
     {
-        $urls = DB::table('urls')->orderBy('id')->get();
-
+        $urls = DB::table('urls')->orderBy('id')-> paginate(15);
         $status = DB::table('url_checks')->get()->keyBy('url_id');
-        //dd($status->keyBy('url_id'));
         return view('index', compact('urls', 'status'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -75,39 +63,5 @@ class UrlsController extends Controller
         $url = DB::table('urls')->find($id);
         $checks = DB::table('url_checks')->orderBy('created_at', 'desc')->where('url_id', $id)->get();
         return view('showurl', compact('url', 'checks'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

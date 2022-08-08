@@ -9,6 +9,7 @@
     @include('flash::message')
 
     <p><h1 class="mt-5 mb-3">Сайт: {{ $url->name }}</h1></p>
+
 </div>
 </div>
 </div>
@@ -44,18 +45,21 @@
                     <th>description</th>
                     <th>Дата создания</th>
                 </tr>
+
                 @foreach($checks as $check)
+
                 <tr>
                     <td>{{ $check->id }}</td>
                     <td>{{ $check->status_code }}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ $check->h1 }}</td>
+                    <td>{{ $check->keywords }}</td>
+                    <td>{{ $check->description }}</td>
                     <td>{{ $check->created_at }}</td>
                 </tr>
+
                 @endforeach
+
             </table>
     </div>
-
 
 @endsection
