@@ -14,10 +14,10 @@ jobs:
       - name: Upload repository
         uses: actions/checkout@v2
 
-      - name: Sepup
+      - name: Setup
         run: make setup
 
-      - name: Check lint
+      - name: Lint
         run: make lint
 
       - name: Execute tests via PHPUnit
