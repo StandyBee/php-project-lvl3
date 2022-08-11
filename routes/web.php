@@ -16,7 +16,7 @@ use App\Http\Controllers\UrlsCheckController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::resource('urls', UrlsController::class)->except(['edit', 'create', 'update', 'destroy']);
 

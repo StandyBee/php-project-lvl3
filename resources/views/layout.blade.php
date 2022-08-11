@@ -11,14 +11,14 @@
   <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="http://localhost:8000">Анализатор страниц</a>
+            <a class="navbar-brand" href="{{ route('welcome') }}">Анализатор страниц</a>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="http://localhost:8000">Главная<span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="{{ route('welcome') }}">Главная<span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="http://localhost:8000/urls">Сайты</a>
+                                <a class="nav-link" href="{{ route('urls.index') }}">Сайты</a>
                             </li>
                         </ul>
                     </div>
