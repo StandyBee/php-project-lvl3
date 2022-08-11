@@ -9,8 +9,12 @@ test-coverage:
 	composer exec --verbose phpunit tests -- --coverage-clover build/logs/clover.xml
 setup:
 	composer install
-	php -r "file_exists('.env') || copy('.env.example', '.env');"
-	php artisan key:generate
+	cp -n .env.example .env|| true
+	php artisan key:gen --ansi
+	touch database/database.sqlite
+	php artisan migrate
+	php artisan db:seed
+	npm ci
 deploy:
 	git push heroku
 

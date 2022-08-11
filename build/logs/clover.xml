@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1660195785">
-  <project timestamp="1660195785">
+<coverage generated="1660207219">
+  <project timestamp="1660207219">
     <file name="/home/fisak/php-project-lvl3/app/Console/Kernel.php">
       <class name="App\Console\Kernel" namespace="global">
         <metrics complexity="2" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
@@ -12,17 +12,17 @@
     </file>
     <file name="/home/fisak/php-project-lvl3/app/Exceptions/Handler.php">
       <class name="App\Exceptions\Handler" namespace="global">
-        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </class>
-      <line num="35" type="method" name="register" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="37" type="stmt" count="0"/>
-      <metrics loc="42" ncloc="26" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      <line num="35" type="method" name="register" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="37" type="stmt" count="5"/>
+      <metrics loc="42" ncloc="26" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
     </file>
     <file name="/home/fisak/php-project-lvl3/app/Http/Controllers/Controller.php">
       <class name="App\Http\Controllers\Controller" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </class>
-      <metrics loc="14" ncloc="14" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      <metrics loc="16" ncloc="16" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/home/fisak/php-project-lvl3/app/Http/Controllers/UrlsCheckController.php">
       <class name="App\Http\Controllers\UrlsCheckController" namespace="global">
@@ -143,7 +143,7 @@
       <class name="App\Models\User" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </class>
-      <metrics loc="45" ncloc="30" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      <metrics loc="47" ncloc="32" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/home/fisak/php-project-lvl3/app/Providers/AppServiceProvider.php">
       <class name="App\Providers\AppServiceProvider" namespace="global">
@@ -193,6 +193,6 @@
       <line num="60" type="stmt" count="0"/>
       <metrics loc="64" ncloc="39" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="10" elements="13" coveredelements="11"/>
     </file>
-    <metrics files="20" loc="678" ncloc="477" classes="10" methods="13" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="59" coveredstatements="39" elements="72" coveredelements="44"/>
+    <metrics files="20" loc="682" ncloc="481" classes="10" methods="13" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="59" coveredstatements="40" elements="72" coveredelements="46"/>
   </project>
 </coverage>
