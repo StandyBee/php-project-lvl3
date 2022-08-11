@@ -2,13 +2,13 @@ name: TestProject
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   Upload_repo:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Upload repository
