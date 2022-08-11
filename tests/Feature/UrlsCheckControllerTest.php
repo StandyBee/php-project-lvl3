@@ -22,7 +22,7 @@ class UrlsCheckControllerTest extends TestCase
     public function testChecks(): void
     {
         $fakeHtml = file_get_contents(__DIR__ . "/../Fixtures/fake.html");
-        $name = DB::table('urls')->where('id', '=',  $this->id)->value('name');
+        $name = DB::table('urls')->where('id', '=', $this->id)->value('name');
 
         Http::fake([$name => Http::response($fakeHtml)]);
 

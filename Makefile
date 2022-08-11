@@ -1,6 +1,6 @@
 
 start:
-	php artisan serve --host 0.0.0.0
+	php artisan serve
 
 setup:
 	composer install
@@ -21,7 +21,7 @@ deploy:
 	git push heroku
 
 lint:
-	composer phpcs
+	composer run-script phpcs -- --standard=PSR12 app tests
 
 lint-fix:
 	composer phpcbf
