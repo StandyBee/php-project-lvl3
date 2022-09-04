@@ -52,8 +52,8 @@
                     <td>{{ $check->id }}</td>
                     <td>{{ $check->status_code }}</td>
                     <td>{{ $check->h1 }}</td>
-                    <td>{{ Str::limit($check->keywords, 20) }}</td>
-                    <td>{{ Str::limit($check->description, 20) }}</td>
+                    <td>{{ Str::limit($check->keywords, 2) }}</td>
+                    <td>{{ Str::limit($check->description, 2) }}</td>
                     <td>{{ $check->created_at }}</td>
                 </tr>
 
