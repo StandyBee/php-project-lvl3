@@ -41,7 +41,7 @@
                     <th>ID</th>
                     <th>Код ответа</th>
                     <th>h1</th>
-                    <th>title</th>
+                    <th>keywords</th>
                     <th>description</th>
                     <th>Дата создания</th>
                 </tr>
