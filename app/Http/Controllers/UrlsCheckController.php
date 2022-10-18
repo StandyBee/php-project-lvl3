@@ -25,7 +25,7 @@ class UrlsCheckController extends Controller
         $url = DB::table('urls')->find($id);
 
         try {
-            $response = Http::timeout(10)->get($url->name);
+            $response = Http::timeout(5)->get($url->name);
         } catch (RequestException | HttpClientException | ConnectionException $exception) {
             flash($exception->getMessage())->error();
             return redirect()->route('urls.show', $id);
@@ -43,7 +43,7 @@ class UrlsCheckController extends Controller
             'created_at' => Carbon::now()]);
 
         DB::table('urls')->where('id', '=', $id)->update(['updated_at' => Carbon::now()]);
-
+        flash("Страница успешно проверена")->info();
         return redirect()->route('urls.show', ['url' => $id]);
     }
 }
