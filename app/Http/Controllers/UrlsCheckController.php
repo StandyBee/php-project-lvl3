@@ -41,9 +41,9 @@ class UrlsCheckController extends Controller
             'description' => optional($document->first('meta[name=description]'))->attr('content'),
             'status_code' => $urlStatus,
             'created_at' => Carbon::now()]);
-        flash("Страница успешно проверена")->success();
-        DB::table('urls')->where('id', '=', $id)->update(['updated_at' => Carbon::now()]);
 
+        DB::table('urls')->where('id', '=', $id)->update(['updated_at' => Carbon::now()]);
+        flash("Страница успешно проверена")->success();
         return redirect()->route('urls.show', ['url' => $id]);
     }
 }
