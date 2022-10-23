@@ -16,8 +16,8 @@ watch:
 migrate:
 	php artisan migrate
 
-console:
-	php artisan tinker
+test_phpunit:
+	composer exec --verbose phpunit tests
 
 log:
 	tail -f storage/logs/laravel.log
