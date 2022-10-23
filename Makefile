@@ -1,25 +1,44 @@
-#Makefile
 start:
-	php artisan serve
-lint:
-	composer run-script phpcs -- --standard=PSR12 app tests
-test:
-	php artisan test
-test-coverage:
-	composer exec --verbose phpunit tests -- --coverage-clover build/logs/clover.xml
+	php artisan serve --host 0.0.0.0
+
 setup:
 	composer install
 	cp -n .env.example .env|| true
 	php artisan key:gen --ansi
+	touch database/database.sqlite
 	php artisan migrate
 	php artisan db:seed
 	npm ci
+
+watch:
+	npm run watch
+
+migrate:
+	php artisan migrate
+
+console:
+	php artisan tinker
+
+log:
+	tail -f storage/logs/laravel.log
+
+test:
+	php artisan test
+
 deploy:
 	git push heroku
 
-test_phpunit:
-	composer exec --verbose phpunit tests
+lint:
+	composer exec phpcs -- --standard=PSR12 app routes tests
+
+lint-fix:
+	composer phpcbf app routes tests database lang
+
+test-coverage:
+	composer exec --verbose phpunit tests -- --coverage-clover build/logs/clover.xml
+
 install:
 	composer install
+
 validate:
 	composer validate
