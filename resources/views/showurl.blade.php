@@ -6,8 +6,9 @@
 <div class="container-lg mt-5">
 <div class="container-lg mt-5">
 <div class="container">
+<div class="container-xxl mt-10">
     @include('flash::message')
-
+</div>
     <p><h1 class="mt-5 mb-3">Сайт: {{ $url->name }}</h1></p>
 
 </div>
