@@ -22,33 +22,28 @@ class UrlsCheckController extends Controller
      */
     public function store(int $id)
     {
-        try {
-            $url = $this->getUrlName($id);
-            $response = Http::get($url);
-            $document = new Document($response->body());
-
-            $checkData = [
-                'url_id' => $id,
-                'status_code' => $response->status(),
-                'h1' => optional($document->first('h1'))->text(),
-                'keywords' => optional($document->first('title'))->text(),
-                'description' => optional($document->first('meta[name=description]'))->getAttribute('content'),
-                'created_at' => Carbon::now(),
-            ];
-            DB::table('url_checks')->insert($checkData);
-
-            flash('Страница успешно проверена')->success();
-        } catch (Exception $exception) {
-            flash($exception->getMessage())->error();
-        }
-        return redirect()->route('urls.show', $id);
-    }
-
-    private function getUrlName(int $id): string
-    {
         $url = DB::table('urls')->find($id);
-        abort_unless($url, 404);
 
-        return $url->name;
+        try {
+            $response = Http::timeout(5)->get($url->name);
+        } catch (RequestException | HttpClientException | ConnectionException $exception) {
+            flash($exception->getMessage())->error();
+            return redirect()->route('urls.show', $id);
+        }
+
+        $urlStatus = Http::get($url->name)->status();
+        $document = new Document($url->name, true);
+
+        DB::table('url_checks')->insert([
+            'url_id' => $id,
+            'h1' => optional($document->first('h1'))->text(),
+            'keywords' => optional($document->first('title'))->text(),
+            'description' => optional($document->first('meta[name=description]'))->attr('content'),
+            'status_code' => $urlStatus,
+            'created_at' => Carbon::now()]);
+        flash("Страница успешно проверена")->success();
+        DB::table('urls')->where('id', '=', $id)->update(['updated_at' => Carbon::now()]);
+
+        return redirect()->route('urls.show', ['url' => $id]);
     }
 }
