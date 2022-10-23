@@ -19,10 +19,6 @@
                     <td>Дата создания</td>
                     <td>{{ $url->created_at }}</td>
                 </tr>
-                <tr>
-                    <td>Дата обновления</td>
-                    <td>{{ $url->updated_at }}</td>
-                </tr>
             </table>
         </div>
         <h2 class="mt-5 mb-3">Проверки</h2>
@@ -35,7 +31,7 @@
                     <th>ID</th>
                     <th>Код ответа</th>
                     <th>h1</th>
-                    <th>keywords</th>
+                    <th>title</th>
                     <th>description</th>
                     <th>Дата создания</th>
                 </tr>
