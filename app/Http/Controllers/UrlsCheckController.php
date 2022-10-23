@@ -37,7 +37,7 @@ class UrlsCheckController extends Controller
             ];
             DB::table('url_checks')->insert($checkData);
 
-            flash('Страница успешно проверен')->success();
+            flash('Страница успешно проверена')->success();
         } catch (Exception $exception) {
             flash($exception->getMessage())->error();
         }
