@@ -3,7 +3,6 @@
 @section('content')
 
 <div class="container-lg mt-5">
-@include('flash::message')
 
     @if ($errors->any())
         @if ($errors->url)

@@ -2,19 +2,10 @@
 
 @section('content')
 
-
-<div class="container-lg mt-5">
-<div class="container-lg mt-5">
-<div class="container">
-<div class="container-xxl mt-10">
-    @include('flash::message')
-</div>
-    <p><h1 class="mt-5 mb-3">Сайт: {{ $url->name }}</h1></p>
-
-</div>
-</div>
-</div>
-<div class="table-responsive">
+<main class="flex-grow-1">
+    <div class="container-lg">
+        <h1 class="mt-5 mb-3">Сайт: {{ $url->name }}</h1>
+        <div class="table-responsive">
             <table class="table table-bordered table-hover text-nowrap">
                 <tr>
                     <td>ID</td>
@@ -28,12 +19,14 @@
                     <td>Дата создания</td>
                     <td>{{ $url->created_at }}</td>
                 </tr>
+                <tr>
+                    <td>Дата обновления</td>
+                    <td>{{ $url->updated_at }}</td>
+                </tr>
             </table>
-</div>
-
-<h2 class="mt-5 mb-3">Проверки</h2>
-
-<form method="post" action="{{ route('urls.check.store', $url->id) }}">
+        </div>
+        <h2 class="mt-5 mb-3">Проверки</h2>
+        <form method="post" action="{{ route('urls.check.store', $url->id) }}">
             @csrf
             <input type="submit" class="btn btn-primary" value="Запустить проверку">
         </form>
@@ -42,25 +35,21 @@
                     <th>ID</th>
                     <th>Код ответа</th>
                     <th>h1</th>
-                    <th>title</th>
+                    <th>keywords</th>
                     <th>description</th>
                     <th>Дата создания</th>
                 </tr>
-
                 @foreach($checks as $check)
-
                 <tr>
                     <td>{{ $check->id }}</td>
                     <td>{{ $check->status_code }}</td>
-                    <td>{{ $check->h1 }}</td>
+                    <td>{{ $check->h1 }}</td>    
                     <td>{{ $check->keywords }}</td>
                     <td>{{ $check->description }}</td>
                     <td>{{ $check->created_at }}</td>
                 </tr>
-
                 @endforeach
-
             </table>
     </div>
-
+</main>
 @endsection

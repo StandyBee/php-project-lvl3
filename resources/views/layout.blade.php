@@ -1,36 +1,35 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Анализатор страниц</title>
+<html>
+    <head>
+        <meta charset="utf-8">
 
-<link href="https://getbootstrap.com/docs/4.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</head>
-  <body>
-    <header>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="{{ route('welcome') }}">Анализатор страниц</a>
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="{{ route('welcome') }}">Главная<span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('urls.index') }}">Сайты</a>
-                            </li>
-                        </ul>
-                    </div>
-        </nav>
-    </header>
-<div class="container">
-    <p>
-    <h1>@yield('title')</h1>
-    <main>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+    <body class="min-vh-100 d-flex flex-column">
+        <header class="flex-shrink-0">
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+                <a class="navbar-brand" href="{{ route('welcome') }}">Анализатор страниц</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link 
+                            {{ request()->routeIs('welcome') ? 'active' : '' }}
+                            " href="{{ route('welcome') }}">Главная</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link
+                            {{ request()->routeIs('urls.show', 'urls.index') ? 'active' : '' }}
+                            "href="{{ route('urls.index') }}">Сайты</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        @include('flash::message')
         @yield('content')
-    </main>
-    </p>
-</div>
-</body>
+
+    </body>
 </html>
