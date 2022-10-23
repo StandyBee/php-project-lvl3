@@ -6,7 +6,7 @@
             'body'       => $message['message']
         ])
     @else
-        <span class="alert
+        <div class="alert
                     alert-{{ $message['level'] }}
                     {{ $message['important'] ? 'alert-important' : '' }}"
                     role="alert"
@@ -20,7 +20,7 @@
             @endif
 
             {!! $message['message'] !!}
-        </span>
+        </div>
     @endif
 @endforeach
 
