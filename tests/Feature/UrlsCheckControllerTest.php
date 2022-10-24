@@ -26,7 +26,7 @@ class UrlsCheckControllerTest extends TestCase
 
         Http::fake([$name => Http::response($fakeHtml)]);
 
-        $response = $this->post(route('urls.check.store', $this->id));
+        $response = $this->post(route('urls.checks.store', $this->id));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
         $this->assertDatabaseHas('url_checks', [
