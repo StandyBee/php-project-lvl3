@@ -36,7 +36,7 @@ class UrlsCheckController extends Controller
 
         DB::table('url_checks')->insert([
             'url_id' => $id,
-            'h1' => optional($document->first('h1'))->text(),
+            //'h1' => optional($document->first('h1'))->text(),
             'keywords' => optional($document->first('title'))->text(),
             'description' => optional($document->first('meta[name=description]'))->attr('content'),
             'status_code' => $urlStatus,
