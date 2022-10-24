@@ -21,4 +21,4 @@ Route::get('/', function () {
 
 Route::resource('urls', UrlsController::class)->except(['edit', 'create', 'update', 'destroy']);
 
-Route::resource('urls.check', UrlsCheckController::class)->only('store');
+Route::resource('urls.checks', UrlsCheckController::class)->only('store');

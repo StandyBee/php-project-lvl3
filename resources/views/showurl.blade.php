@@ -22,7 +22,7 @@
             </table>
         </div>
         <h2 class="mt-5 mb-3">Проверки</h2>
-        <form method="post" action="{{ route('urls.check.store', $url->id) }}">
+        <form method="post" action="{{ route('urls.checks.store', $url->id) }}">
             @csrf
             <input type="submit" class="btn btn-primary" value="Запустить проверку">
         </form>
