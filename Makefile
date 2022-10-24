@@ -3,6 +3,7 @@ start:
 
 setup:
 	composer install
+	service postgresql start
 	cp -n .env.example .env|| true
 	php artisan key:gen --ansi
 	php artisan migrate
