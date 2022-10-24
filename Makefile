@@ -6,6 +6,8 @@ setup:
 	composer install
 	cp -n .env.example .env|| true
 	php artisan key:gen --ansi
+	php artisan serve
+	service postgresql start
 	php artisan migrate
 	php artisan db:seed
 	npm ci
