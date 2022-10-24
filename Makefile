@@ -1,5 +1,6 @@
 start:
-	php artisan serve --host 0.0.0.0
+	php artisan serve
+	service postgresql start
 
 setup:
 	composer install
