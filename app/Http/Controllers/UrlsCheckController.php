@@ -30,8 +30,8 @@ class UrlsCheckController extends Controller
                 'description' => optional($document->first('meta[name=description]'))->attr('content'),
                 'status_code' => $response->status(),
                 'created_at' => Carbon::now()]);
-    
-            DB::table('urls')->where('id', '=', $id)->update(['updated_at' => Carbon::now()]);
+
+            //DB::table('urls')->where('id', '=', $id)->update(['updated_at' => Carbon::now()]);
             flash("Страница успешно проверена")->success();
         } catch (RequestException | HttpClientException | ConnectionException $exception) {
             flash($exception->getMessage())->error();
