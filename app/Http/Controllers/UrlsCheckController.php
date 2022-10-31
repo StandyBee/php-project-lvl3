@@ -44,6 +44,6 @@ class UrlsCheckController extends Controller
 
         DB::table('urls')->where('id', '=', $id)->update(['updated_at' => Carbon::now()]);
         flash("Страница успешно проверена")->success();
-        return redirect()->route('urls.show', ['url' => $id]);
+        return redirect()->route('urls.show', $id);
     }
 }
