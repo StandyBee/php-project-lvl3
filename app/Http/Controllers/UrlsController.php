@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -24,7 +25,7 @@ class UrlsController extends Controller
 
         if ($validator->fails()) {
             flash('Некорректный URL')->error();
-            return redirect()->route('urls.index')->withErrors($validator);
+            return response()->view('welcome', [], 422);
         }
 
         $parsedRequest = parse_url($request['url.name']);
