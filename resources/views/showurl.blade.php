@@ -40,8 +40,8 @@
                     <td>{{ $check->id }}</td>
                     <td>{{ $check->status_code }}</td>
                     <td>{{ $check->h1 }}</td>    
-                    <td>{{ Str::limit($check->title, 20) }}</td>
-                    <td>{{ Str::limit($check->description, 20) }}</td>
+                    <td>{{ Str::limit($check->title, 30) }}</td>
+                    <td>{{ Str::limit($check->description, 30) }}</td>
                     <td>{{ $check->created_at }}</td>
                 </tr>
                 @endforeach
