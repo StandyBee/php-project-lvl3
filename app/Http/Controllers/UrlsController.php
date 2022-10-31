@@ -23,7 +23,8 @@ class UrlsController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return back()->withErrors($validator);
+            flash('Некорректный URL')->error();
+            return redirect()->route('urls.index')->withErrors($validator);
         }
 
         $parsedRequest = parse_url($request['url.name']);
