@@ -26,7 +26,8 @@ class UrlsController extends Controller
 
         if ($validator->fails()) {
             flash('Некорректный URL')->error();
-            return response()->view('welcome', [], 422);
+            $res = new \Illuminate\Contracts\Routing\ResponseFactory();
+            return $res->view('welcome', [], 422);
         }
 
         $parsedRequest = parse_url($request['url.name']);
