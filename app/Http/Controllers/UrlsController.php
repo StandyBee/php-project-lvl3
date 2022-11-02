@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -25,7 +25,7 @@ class UrlsController extends Controller
 
         if ($validator->fails()) {
             flash('Некорректный URL')->error();
-            return response()->view('welcome', [], 422);
+            return response(View::make('welcome'), 422);
         }
 
         $parsedRequest = parse_url($request['url.name']);
