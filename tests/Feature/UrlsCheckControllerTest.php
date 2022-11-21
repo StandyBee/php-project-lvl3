@@ -5,7 +5,10 @@ namespace Tests\Feature;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use WithoutMiddleware;
 
 class UrlsCheckControllerTest extends TestCase
 {
@@ -22,6 +25,7 @@ class UrlsCheckControllerTest extends TestCase
 
     public function testStore(): void
     {
+        $this->withoutMiddleware();
         $fakeHtml = file_get_contents(__DIR__ . "/../Fixtures/fake.html");
         $name = DB::table('urls')->where('id', '=', $this->id)->value('name');
         Http::fake(['google.com/*' => Http::response($fakeHtml, 200)]);
