@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 use Tests\TestCase;
-use Exception;
 
 class UrlsCheckControllerTest extends TestCase
 {
@@ -24,20 +23,13 @@ class UrlsCheckControllerTest extends TestCase
     public function testStore(): void
     {
         $this->withoutMiddleware();
-        $path = __DIR__ . '/../Fixtures/fake.html';
-        $html = file_get_contents($path);
-        if ($html === false) {
-            throw new Exception("file path: {$path} - is incorrect");
-        }
-
-        Http::fake([
-            $this->url => Http::response($html, 200)
-        ]);
+        $fakeHtml = file_get_contents(__DIR__ . "/../Fixtures/fake.html");
+        $name = DB::table('urls')->where('id', '=', $this->id)->value('name');
+        Http::fake(['google.com/*' => Http::response($fakeHtml, 200)]);
 
         $response = $this->post(route('urls.checks.store', $this->id));
-        $response->assertRedirect()->assertStatus(302);
         $response->assertSessionHasNoErrors();
-
+        $response->assertRedirect();
         $data = [
             'url_id' => $this->id,
             'status_code' => 200,
