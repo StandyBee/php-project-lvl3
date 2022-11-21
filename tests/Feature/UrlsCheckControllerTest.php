@@ -2,36 +2,51 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
+use Carbon\Carbon;
+use Tests\TestCase;
+use Exception;
 
 class UrlsCheckControllerTest extends TestCase
 {
-    public int $id;
+    private int $id;
+    private string $url;
     public function setUp(): void
     {
         parent::setUp();
-        $data = ['name' => 'https://google.com'];
+
+        $this->url = 'https://google.com';
+        $data = ['name' => $this->url];
         $this->id = DB::table('urls')->insertGetId($data);
     }
 
-    public function testChecks(): void
+    public function testStore(): void
     {
-        $fakeHtml = file_get_contents(__DIR__ . "/../Fixtures/fake.html");
-        $name = DB::table('urls')->where('id', '=', $this->id)->value('name');
+        $this->withoutMiddleware();
+        $path = __DIR__ . '/../Fixtures/fake.html';
+        $html = file_get_contents($path);
+        if ($html === false) {
+            throw new Exception("file path: {$path} - is incorrect");
+        }
 
-        Http::fake([$name => Http::response($fakeHtml)]);
+        Http::fake([
+            $this->url => Http::response($html, 200)
+        ]);
 
         $response = $this->post(route('urls.checks.store', $this->id));
+        $response->assertRedirect()->assertStatus(302);
         $response->assertSessionHasNoErrors();
-        $response->assertRedirect();
-        $this->assertDatabaseHas('url_checks', [
+
+        $data = [
             'url_id' => $this->id,
-            'created_at' => Carbon::now()
-        ]);
+            'status_code' => 200,
+            'h1' => 'h1',
+            'title' => 'title',
+            'description' => 'description',
+            'created_at' => Carbon::now(),
+        ];
+
+        $this->assertDatabaseHas('url_checks', $data);
     }
 }
