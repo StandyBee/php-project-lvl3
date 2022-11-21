@@ -11,7 +11,7 @@ class UrlCheckControllerTest extends TestCase
 {
     public function testStore(): void
     {
-        $this->withoutMiddleware();
+        //$this->withoutMiddleware();
         $data = [
             'name' => 'https://google.com',
             'created_at' => Carbon::now(),
@@ -25,10 +25,10 @@ class UrlCheckControllerTest extends TestCase
         }
 
         Http::fake([
-            $data['name'] => Http::response($fakeHtml, 200)
+            $data['name'] => Http::response(['h1' => 'asd'], 200)
         ]);
 
-        $response = $this->post(route('urls.checks.store', 1));
+        $response = $this->post(route('urls.checks.store', $id));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
 

@@ -7,16 +7,20 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use WithoutMiddleware;
 
 class UrlsControllerTest extends TestCase
 {
-    public int $id;
+    private int $id;
+    private array $data;
+
     public function setUp(): void
     {
         parent::setUp();
-        $data = ['name' => 'https://google.com', 'created_at' => Carbon::now()];
-        $this->id = DB::table('urls')->insertGetId($data);
+        $this->data = [
+            'name' => 'https://google.com', 
+            'created_at' => Carbon::now(),
+        ];
+        $this->id = DB::table('urls')->insertGetId($this->data);
     }
 
     public function testIndex(): void
@@ -29,12 +33,12 @@ class UrlsControllerTest extends TestCase
     {
         $response = $this->get(route('urls.show', $this->id));
         $response->assertOk();
-        $response->assertSee(DB::table('urls')->find($this->id)->name);
+        $response->assertSee($this->data['name']);
     }
 
     public function testStore(): void
     {
-        $this->withoutMiddleware();
+        //$this->withoutMiddleware();
         $name = ['name' => 'https://google.com', 'created_at' => Carbon::now()];
         $response = $this->post(route('urls.store', ['url' => $name]));
         $response->assertSessionHasNoErrors();
