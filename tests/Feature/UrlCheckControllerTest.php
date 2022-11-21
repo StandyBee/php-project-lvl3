@@ -20,12 +20,12 @@ class UrlCheckControllerTest extends TestCase
 
         $fakeHtml = file_get_contents(__DIR__ . '/../Fixtures/fake.html');
 
-        if ($fakeHtml === false) {
+        if (!$fakeHtml) {
             throw new \Exception('failed to connect');
         }
 
         Http::fake([
-            $data['name'] => Http::response(['h1' => 'asd'], 200)
+            '*' => Http::response($fakeHtml, 200)
         ]);
 
         $response = $this->post(route('urls.checks.store', $id));
