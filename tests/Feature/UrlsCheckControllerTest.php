@@ -37,7 +37,6 @@ class UrlCheckControllerTest extends TestCase
             'status_code' => 200,
             'h1' => null,
             'title' => 'Google',
-            'description' => null,
         ];
         $this->assertDatabaseHas('url_checks', $expected);
     }
