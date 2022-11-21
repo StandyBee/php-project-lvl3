@@ -25,7 +25,7 @@ class UrlCheckControllerTest extends TestCase
         }
 
         Http::fake([
-            '*' => Http::response($fakeHtml, 200)
+            $data['name'] => Http::response($fakeHtml, 200)
         ]);
 
         $response = $this->post(route('urls.checks.store', $id));
@@ -35,8 +35,9 @@ class UrlCheckControllerTest extends TestCase
         $expected = [
             'url_id' => $id,
             'status_code' => 200,
-            'h1' => null,
-            'title' => 'Google',
+            'h1' => 'h1',
+            'title' => 'title',
+            'description' => 'description',
         ];
         $this->assertDatabaseHas('url_checks', $expected);
     }
