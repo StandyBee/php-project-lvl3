@@ -17,7 +17,7 @@ class UrlsControllerTest extends TestCase
     {
         parent::setUp();
         $this->data = [
-            'name' => 'https://google.com', 
+            'name' => 'https://google.com',
             'created_at' => Carbon::now(),
         ];
         $this->id = DB::table('urls')->insertGetId($this->data);
