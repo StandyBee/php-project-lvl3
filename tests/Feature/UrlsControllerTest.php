@@ -33,7 +33,6 @@ class UrlsControllerTest extends TestCase
 
     public function testStore(): void
     {
-        $this->withoutMiddleware();
         $name = ['name' => 'https://google.com', 'created_at' => Carbon::now()];
         $response = $this->post(route('urls.store', ['url' => $name]));
         $response->assertSessionHasNoErrors();
