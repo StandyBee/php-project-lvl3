@@ -38,10 +38,9 @@ class UrlsControllerTest extends TestCase
 
     public function testStore(): void
     {
-        $name = ['name' => 'https://google.com', 'created_at' => Carbon::now()];
-        $response = $this->post(route('urls.store', ['url' => $name]));
+        $response = $this->post(route('urls.store', ['url' => $this->data]));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
-        $this->assertDatabaseHas('urls', $name);
+        $this->assertDatabaseHas('urls', $this->data);
     }
 }
