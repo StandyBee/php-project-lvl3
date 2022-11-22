@@ -11,7 +11,6 @@ class UrlCheckControllerTest extends TestCase
 {
     public function testStore(): void
     {
-        //$this->withoutMiddleware();
         $data = [
             'name' => 'https://google.com',
             'created_at' => Carbon::now(),

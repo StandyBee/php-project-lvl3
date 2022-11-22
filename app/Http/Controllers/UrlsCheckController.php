@@ -21,7 +21,7 @@ class UrlsCheckController extends Controller
 
         try {
             $response = Http::timeout(5)->get($url->name);
-            $document = new Document($url->name, true);
+            $document = new Document($response->body());
 
             DB::table('url_checks')->insert([
                 'url_id' => $id,
