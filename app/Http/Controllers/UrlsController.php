@@ -32,7 +32,7 @@ class UrlsController extends Controller
         $data = ['name' => "{$parsedRequest['scheme']}://{$parsedRequest['host']}", 'created_at' => Carbon::now()];
 
         if (DB::table('urls')->where('name', $data['name'])->doesntExist()) {
-            $query_insert = DB::table('urls')->insertGetId($data);
+            $queryInsert = DB::table('urls')->insertGetId($data);
             $id = DB::table('urls')->where('name', $data['name'])->value('id');
             flash('Страница успешно добавлена')->success();
             return redirect()->route('urls.show', $id);
