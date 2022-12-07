@@ -1,2 +1,2 @@
-web: vendor/bin/heroku-php-nginx -C nginx.conf public/
+web: /go-server-web
 release: php artisan migrate --force
