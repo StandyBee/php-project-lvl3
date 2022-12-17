@@ -19,17 +19,18 @@ class UrlsCheckController extends Controller
     {
         $url = DB::table('urls')->find($id);
         abort_unless($url, 404);
-
+        //$response = Http::timeout(5)->get($url->name);
+        //dd($response);
         try {
             $response = Http::timeout(5)->get($url->name);
-            $document = new Document($response->getBody());
+            $document = new Document($url->name, true);
 
             DB::table('url_checks')->insert([
                 'url_id' => $id,
                 'h1' => optional($document->first('h1'))->text(),
                 'title' => optional($document->first('title'))->text(),
                 'description' => optional($document->first('meta[name=description]'))->attr('content'),
-                'status_code' => $response->getStatusCode(),
+                'status_code' => $response->status(),
                 'created_at' => Carbon::now()
             ]);
 
