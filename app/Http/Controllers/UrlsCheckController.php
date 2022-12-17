@@ -22,14 +22,14 @@ class UrlsCheckController extends Controller
 
         try {
             $response = Http::timeout(5)->get($url->name);
-            $document = new Document($response->body());
+            $document = new Document(@$response->body());
 
             DB::table('url_checks')->insert([
                 'url_id' => $id,
                 'h1' => optional($document->first('h1'))->text(),
                 'title' => optional($document->first('title'))->text(),
                 'description' => optional($document->first('meta[name=description]'))->attr('content'),
-                'status_code' => $response->status(),
+                'status_code' => @$response->status(),
                 'created_at' => Carbon::now()
             ]);
 
