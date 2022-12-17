@@ -8,8 +8,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Http;
 use DiDom\Document;
 use Illuminate\Http\Client\HttpClientException;
-use Illuminate\Http\Client\ConnectionException;
-use GuzzleHttp\Exception\RequestException;
 use Carbon\Carbon;
 
 class UrlsCheckController extends Controller
