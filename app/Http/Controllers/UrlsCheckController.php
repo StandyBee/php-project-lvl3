@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Http;
 use DiDom\Document;
 use Illuminate\Http\Client\HttpClientException;
+use Illuminate\Http\Client\ConnectionException;
+use GuzzleHttp\Exception\RequestException;
 use Carbon\Carbon;
 
 class UrlsCheckController extends Controller
