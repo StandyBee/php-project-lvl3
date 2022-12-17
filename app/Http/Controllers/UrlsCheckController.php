@@ -19,11 +19,10 @@ class UrlsCheckController extends Controller
     {
         $url = DB::table('urls')->find($id);
         abort_unless($url, 404);
-        //$response = Http::timeout(5)->get($url->name);
-        //dd($response);
+
         try {
             $response = Http::timeout(5)->get($url->name);
-            $document = new Document($url->name, true);
+            $document = new Document($response->body());
 
             DB::table('url_checks')->insert([
                 'url_id' => $id,
