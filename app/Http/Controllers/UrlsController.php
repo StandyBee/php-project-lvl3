@@ -13,14 +13,19 @@ class UrlsController extends Controller
     public function index()
     {
         $urls = DB::table('urls')->orderBy('id')-> paginate(15);
-        $status = DB::table('url_checks')->get()->keyBy('url_id');
+        $status = DB::table('url_checks')
+            ->orderBy('url_id')
+            ->latest()
+            ->distinct('url_id')
+            ->get()
+            ->keyBy('url_id');
         return view('index', compact('urls', 'status'));
     }
 
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'url.name' => ['required', 'url', 'max:255']
+            'url.name' => ['required', 'url', 'max:255', 'active_url']
         ]);
 
         if ($validator->fails()) {
@@ -29,7 +34,8 @@ class UrlsController extends Controller
         }
 
         $parsedRequest = parse_url($request['url.name']);
-        $data = ['name' => "{$parsedRequest['scheme']}://{$parsedRequest['host']}", 'created_at' => Carbon::now()];
+        $normalizedUrl = strtolower("{$parsedRequest['scheme']}://{$parsedRequest['host']}");
+        $data = ['name' => $normalizedUrl, 'created_at' => Carbon::now()];
 
         if (DB::table('urls')->where('name', $data['name'])->doesntExist()) {
             $queryInsert = DB::table('urls')->insertGetId($data);
